@@ -1,16 +1,31 @@
 <html>
 <head>
+    <style>
+        input
+        {
+            width: 15px;
+            height: 20px;
+            border: 0;
+            background: transparent;
+        }
+    </style>
     <title>Speech recognition</title>
 </head>
 <body>
-    <p>Click the microphone icon and speak: <input onwebkitspeechchange="handleSpeech(this)" x-webkit-speech /></p>
+    <p>Click the microphone icon and speak: <input id="input" onwebkitspeechchange="handleSpeechChange(this)" onclick="handleSpeechStart()" x-webkit-speech /></p>
     <p id="words"></p>
     <script>
+        var input = document.getElementById('input');
         var words = document.getElementById('words');
 
-        function handleSpeech(el)
+        function handleSpeechStart()
         {
-            words.innerHTML = el.value;        
+            words.innerHTML = 'Listening...';
+        }
+
+        function handleSpeechChange(el)
+        {
+            words.innerHTML = 'You said: ' + el.value;        
         }
     </script>
 </body>
